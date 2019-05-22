@@ -1,0 +1,45 @@
+﻿{
+  "Version": "1",
+  "TimerModes": [
+    {
+      "Name": "自我介绍",
+      "Description": "自我介绍：20秒倒计时⏲",
+      "Duration": "00:00:20",
+      "IsCountDown": true,
+      "TimeToAlert": "00:00:00",
+      "AlertSoundFilePath": ""
+    },
+    {
+      "Name": "自主命题讲解",
+      "Description": "自主命题讲解：4分钟计时⏲",
+      "Duration": "00:04:10",
+      "IsCountDown": false,
+      "TimeToAlert": "00:04:00",
+      "AlertSoundFilePath": ""
+    },
+    {
+      "Name": "随机命题讲解",
+      "Description": "随机命题讲解: 2分钟计时⏲",
+      "Duration": "00:02:10",
+      "IsCountDown": false,
+      "TimeToAlert": "00:02:00",
+      "AlertSoundFilePath": ""
+    },
+    {
+      "Name": "科技常识问答",
+      "Description": "科技常识问答: 10秒倒计时⏲",
+      "Duration": "00:00:10",
+      "IsCountDown": true,
+      "TimeToAlert": "00:00:00",
+      "AlertSoundFilePath": ""
+    },
+    {
+      "Name": "测试",
+      "Description": "测试",
+      "Duration": "00:00:10",
+      "IsCountDown": true,
+      "TimeToAlert": "00:00:05",
+      "AlertSoundFilePath": ""
+    }
+  ]
+}
