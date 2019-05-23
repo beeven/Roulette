@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="300" WindowStyle="None" Icon="timer.ico">
     <Window.Resources>
         <SolidColorBrush x:Key="NormalTimerBrush" Color="Black"></SolidColorBrush>
         <SolidColorBrush x:Key="AlertTimerBrush" Color="Red"></SolidColorBrush>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition />
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
-            <RowDefinition Height="100"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Label x:Name="descText" Grid.ColumnSpan="2" Content="自我介绍：20秒倒计时" FontSize="22"></Label>
         <Viewbox Grid.Row="1" Grid.Column="1">

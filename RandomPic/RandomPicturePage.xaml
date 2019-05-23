@@ -1,0 +1,84 @@
+﻿<Page x:Class="RandomPic.RandomPicturePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RandomPic"
+      xmlns:md="clr-namespace:RandomPic.Model"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="750" 
+      Title="RandomPicturePage">
+    <Viewbox >
+        <Grid Width="750" Height="450" 
+              d:DataContext="{d:DesignData Source=/SampleData/RandomPicturePageSampleData.xaml}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ListView Name="lvPictures"
+                      
+                ItemsSource="{Binding Path=Pictures}" 
+                      SelectedItem="{Binding Path=SelectedPicture, Mode=TwoWay}" 
+                      SelectedIndex="3"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.Resources>
+                    <ControlTemplate x:Key="ItemSelected" TargetType='{x:Type ListViewItem}'>
+                        <DockPanel Margin="5" Width="94" Height="94">
+                            <Border BorderBrush="Red" BorderThickness="5">
+                                <Image Source="{Binding Path=FilePath}" Stretch="UniformToFill" >
+                                </Image>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                    <ControlTemplate x:Key="ItemDeSelected" TargetType='{x:Type ListViewItem}'>
+                        <DockPanel Margin="5" Width="94" Height="94">
+                            <Border>
+                                <Image Source="{Binding Path=FilePath}" Stretch="UniformToFill" >
+                                    <Image.Effect>
+                                        <BlurEffect/>
+                                    </Image.Effect>
+                                </Image>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                <Setter Property="Template" Value="{StaticResource ItemSelected}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                <Setter Property="Template" Value="{StaticResource ItemDeSelected}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                        <EventSetter Event="PreviewMouseDown" Handler="ListViewItem_PreviewMouseDown" ></EventSetter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <DockPanel Name="dpPicture" Visibility="Hidden" 
+                       VirtualizingPanel.VirtualizationMode="Recycling"
+                       MouseDown="DpPicture_MouseDown">
+                <Image Source="{Binding SelectedPicture.FilePath}"/>
+            </DockPanel>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label></Label>
+                <Button Name="btnChoose" Margin="5"  Grid.Column="1" Click="ChooseButton_Click">随机选图</Button>
+
+            </Grid>
+
+        </Grid>
+    </Viewbox>
+</Page>

@@ -28,6 +28,10 @@ namespace Timer
         private bool needReset = false;
         private bool needChangeColor = false;
 
+        private MediaPlayer tickSoundPlayer = new MediaPlayer();
+        private bool bTickSoundPlaying = false;
+        private MediaPlayer alertSoundPlayer = new MediaPlayer();
+        
         public TimerMode[] timerModes;
         public int timerModeIndex = 0;
         public TimerMode currentTimerMode;
@@ -35,6 +39,7 @@ namespace Timer
         {
             InitializeComponent();
             this.KeyDown += MainWindow_KeyDown;
+            this.MouseDoubleClick += MainWindow_MouseDoubleClick;
             this.preciseTimer = new Stopwatch();
 
             timer = new DispatcherTimer(DispatcherPriority.Render)
@@ -63,6 +68,37 @@ namespace Timer
 
             timerModeIndex = -1;
             SwitchTimerMode(false);
+
+            tickSoundPlayer.Open(new Uri("pack://siteoforigin:,,,/sounds/tick.mp3"));
+            tickSoundPlayer.MediaEnded += TickSoundPlayer_MediaEnded;
+            
+        }
+
+        private void TickSoundPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            bTickSoundPlaying = false;
+        }
+
+        private void PlayTickSound()
+        {
+            if (!bTickSoundPlaying)
+            {
+                tickSoundPlayer.Position = TimeSpan.Zero;
+                tickSoundPlayer.Play();
+                bTickSoundPlaying = true;
+            }
+        }
+
+        private void MainWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState != WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+            }
         }
 
         public void SwitchTimerMode(bool previous = false)
@@ -88,6 +124,10 @@ namespace Timer
             currentTimerMode = timerModes[timerModeIndex];
             ResetTimer();
             this.descText.Content = currentTimerMode.Description;
+            if(!string.IsNullOrWhiteSpace(currentTimerMode.AlertSoundFilePath))
+            {
+                alertSoundPlayer.Open(new Uri(currentTimerMode.AlertSoundFilePath));
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -95,31 +135,57 @@ namespace Timer
             if (currentTimerMode.IsCountDown)
             {
                 currentTime = currentTimerMode.Duration - TimeSpan.FromMilliseconds(this.preciseTimer.ElapsedMilliseconds);
-                if (currentTime <= currentTimerMode.TimeToAlert && needChangeColor)
+                if (currentTime <= currentTimerMode.TimeToAlert)
                 {
-                    needChangeColor = false;
-                    this.timerText.Foreground = this.FindResource("AlertTimerBrush") as Brush;
+                    if (currentTime.Milliseconds > 900)
+                    {
+                        PlayTickSound();
+                    }
+                    if (needChangeColor)
+                    {
+                        needChangeColor = false;
+                        this.timerText.Foreground = this.FindResource("AlertTimerBrush") as Brush;
+                    }
+                    
                 }
-                if(currentTime <= TimeSpan.Zero)
+                if (currentTime <= TimeSpan.Zero)
                 {
                     StopCountDown();
                     currentTime = TimeSpan.Zero;
                     needReset = true;
+                    if (alertSoundPlayer.Source != null)
+                    {
+                        alertSoundPlayer.Position = TimeSpan.Zero;
+                        alertSoundPlayer.Play();
+                    }
                 }
             }
             else
             {
                 currentTime = TimeSpan.FromMilliseconds(this.preciseTimer.ElapsedMilliseconds);
-                if (currentTime >= currentTimerMode.TimeToAlert && needChangeColor)
+                if (currentTime >= currentTimerMode.TimeToAlert)
                 {
-                    needChangeColor = false;
-                    this.timerText.Foreground = this.FindResource("AlertTimerBrush") as Brush;
+                    if (currentTime.Milliseconds > 900)
+                    {
+                        PlayTickSound();
+                    }
+                    if (needChangeColor)
+                    {
+                        needChangeColor = false;
+                        this.timerText.Foreground = this.FindResource("AlertTimerBrush") as Brush;
+                    }
+                    
                 }
-                if(currentTime >= currentTimerMode.Duration)
+                if (currentTime >= currentTimerMode.Duration)
                 {
                     StopCountDown();
                     currentTime = currentTimerMode.Duration;
                     needReset = true;
+                    if(alertSoundPlayer.Source != null)
+                    {
+                        alertSoundPlayer.Position = TimeSpan.Zero;
+                        alertSoundPlayer.Play();
+                    }
                 }
             }
 
@@ -182,7 +248,7 @@ namespace Timer
             preciseTimer.Reset();
             this.needChangeColor = true;
             this.needReset = false;
-            
+
             this.timerText.Foreground = this.FindResource("NormalTimerBrush") as Brush;
             SetTime();
         }

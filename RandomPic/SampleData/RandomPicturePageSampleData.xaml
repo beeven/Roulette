@@ -1,0 +1,27 @@
+﻿<m:RandomPictureViewModel xmlns:m="clr-namespace:RandomPic.Model">
+    <m:RandomPictureViewModel.Pictures>
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/01.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/02.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/03.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/04.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/05.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/06.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/07.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/08.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/09.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/10.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/11.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/12.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/13.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/14.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/15.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/16.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/17.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/18.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/19.jpg" IsSelected="False" HasBeenChosen="False" />
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/20.jpg" IsSelected="False" HasBeenChosen="False" />
+    </m:RandomPictureViewModel.Pictures>
+    <m:RandomPictureViewModel.SelectedPicture>
+        <m:PictureInfo FilePath="pack://siteoforigin:,,,/images/03.jpg" IsSelected="False" HasBeenChosen="False" />
+    </m:RandomPictureViewModel.SelectedPicture>
+</m:RandomPictureViewModel>

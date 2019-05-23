@@ -7,7 +7,7 @@
       "Duration": "00:00:20",
       "IsCountDown": true,
       "TimeToAlert": "00:00:00",
-      "AlertSoundFilePath": ""
+      "AlertSoundFilePath": "pack://siteoforigin:,,,/sounds/ending3.mp3"
     },
     {
       "Name": "自主命题讲解",
@@ -15,7 +15,7 @@
       "Duration": "00:04:10",
       "IsCountDown": false,
       "TimeToAlert": "00:04:00",
-      "AlertSoundFilePath": ""
+      "AlertSoundFilePath": "pack://siteoforigin:,,,/sounds/ending3.mp3"
     },
     {
       "Name": "随机命题讲解",
@@ -23,7 +23,7 @@
       "Duration": "00:02:10",
       "IsCountDown": false,
       "TimeToAlert": "00:02:00",
-      "AlertSoundFilePath": ""
+      "AlertSoundFilePath": "pack://siteoforigin:,,,/sounds/ending3.mp3"
     },
     {
       "Name": "科技常识问答",
@@ -31,7 +31,7 @@
       "Duration": "00:00:10",
       "IsCountDown": true,
       "TimeToAlert": "00:00:00",
-      "AlertSoundFilePath": ""
+      "AlertSoundFilePath": "pack://siteoforigin:,,,/sounds/ending3.mp3"
     },
     {
       "Name": "测试",
@@ -39,7 +39,7 @@
       "Duration": "00:00:10",
       "IsCountDown": true,
       "TimeToAlert": "00:00:05",
-      "AlertSoundFilePath": ""
+      "AlertSoundFilePath": "pack://siteoforigin:,,,/sounds/ending3.mp3"
     }
   ]
 }
