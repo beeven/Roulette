@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RandomPic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="750" WindowStyle="SingleBorderWindow"
-        Source="WelcomePage.xaml" ShowsNavigationUI="False" KeyDown="NavigationWindow_KeyDown">
+        Title="MainWindow" Height="450" Width="750" WindowStyle="None"
+        Source="WelcomePage.xaml" ShowsNavigationUI="False" 
+        KeyDown="NavigationWindow_KeyDown"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True">
 
 </NavigationWindow>

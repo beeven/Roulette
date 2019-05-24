@@ -5,25 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="300" WindowStyle="None" Icon="timer.ico">
+        Title="MainWindow" Height="600" Width="400" WindowStyle="None" 
+        Icon="timer.ico"
+        BorderThickness="0"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
     <Window.Resources>
-        <SolidColorBrush x:Key="NormalTimerBrush" Color="Black"></SolidColorBrush>
+        <SolidColorBrush x:Key="NormalTimerBrush" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="AlertTimerBrush" Color="Red"></SolidColorBrush>
     </Window.Resources>
-    <Grid>
+    <Viewbox Stretch="Uniform">
+    <Grid Height="600" Width="400">
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/background.jpg"></ImageBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition />
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition/>
-            <RowDefinition />
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="descText" Grid.ColumnSpan="2" Content="自我介绍：20秒倒计时" FontSize="22"></Label>
-        <Viewbox Grid.Row="1" Grid.Column="1">
+        <Label x:Name="descText" Grid.Row="1" Grid.Column="1"  Content="倒计时" 
+               FontSize="32" HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" FontFamily="Microsoft YaHei" Foreground="White"></Label>
+        <Viewbox Grid.Row="2" Grid.Column="1" >
             <TextBlock x:Name="timerText" Text="04:00.00" FontFamily="Consolas"/>
         </Viewbox>
     </Grid>
+    </Viewbox>
 </Window>

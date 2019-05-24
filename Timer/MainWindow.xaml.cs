@@ -126,6 +126,7 @@ namespace Timer
             this.descText.Content = currentTimerMode.Description;
             if(!string.IsNullOrWhiteSpace(currentTimerMode.AlertSoundFilePath))
             {
+                alertSoundPlayer.Stop();
                 alertSoundPlayer.Open(new Uri(currentTimerMode.AlertSoundFilePath));
             }
         }

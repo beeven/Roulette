@@ -33,7 +33,13 @@ namespace RandomPic
                     Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
                     break;
                 case Key.F2:
-                    NavigationService.Navigate(new Uri("RandomPicturePage.xaml", UriKind.Relative));
+                    Navigate(new Uri("RandomPicturePage.xaml", UriKind.Relative));
+                    break;
+                case Key.F3:
+                    Navigate(new Uri("QuizPage.xaml", UriKind.Relative));
+                    break;
+                case Key.F6:
+                    Navigate(new Uri("QuizManagerPage.xaml", UriKind.Relative));
                     break;
 
             }
