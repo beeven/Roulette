@@ -55,6 +55,7 @@ namespace RandomPic
             services.AddTransient<QuizPage>();
             services.AddTransient<WelcomePage>();
             services.AddTransient<QuizManagerPage>();
+            services.AddTransient<EndingPage>();
         }
 
         private void InitializeDatabase()

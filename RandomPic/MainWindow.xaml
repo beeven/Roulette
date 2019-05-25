@@ -9,6 +9,8 @@
         ShowsNavigationUI="False" 
         KeyDown="NavigationWindow_KeyDown"
         ResizeMode="CanResizeWithGrip"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+                  MouseLeftButtonDown="NavigationWindow_MouseLeftButtonDown"
+        PreviewMouseDoubleClick="NavigationWindow_PreviewMouseDoubleClick">
 
 </NavigationWindow>

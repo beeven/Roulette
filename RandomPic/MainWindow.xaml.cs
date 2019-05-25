@@ -44,11 +44,31 @@ namespace RandomPic
                 case Key.F3:
                     Navigate(_services.GetRequiredService<QuizPage>());
                     break;
+                case Key.F4:
+                    Navigate(_services.GetRequiredService<EndingPage>());
+                    break;
                 case Key.F6:
                     Navigate(_services.GetRequiredService<QuizManagerPage>());
                     break;
 
             }
+        }
+
+        private void NavigationWindow_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            } else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            e.Handled = true;
+        }
+
+        private void NavigationWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

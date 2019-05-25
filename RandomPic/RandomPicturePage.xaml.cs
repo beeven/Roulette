@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -25,7 +26,7 @@ namespace RandomPic
         public RandomPictureViewModel model = RandomPictureViewModel.LoadFromFolder();
 
         private DispatcherTimer randPicTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };
-        private DispatcherTimer countDownTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
+        private DispatcherTimer countDownTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(3) };
         private Random rand = new Random();
         public RandomPicturePage()
         {
@@ -73,6 +74,8 @@ namespace RandomPic
             {
                 dpPicture.Visibility = Visibility.Visible;
                 lvPictures.Visibility = Visibility.Hidden;
+                var storyboard = (Storyboard)this.FindResource("ScalePicture");
+                storyboard.Begin();
             }
         }
     }

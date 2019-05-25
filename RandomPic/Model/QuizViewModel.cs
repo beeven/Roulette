@@ -39,6 +39,9 @@ namespace RandomPic.Model
             }
         }
 
+        public int RemainingQuizzesCount { get; set; }
+        public int TotalQuizzesCount { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

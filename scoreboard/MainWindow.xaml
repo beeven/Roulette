@@ -5,10 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:scoreboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="400">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/background.jpg"></ImageBrush>
-        </Grid.Background>
-    </Grid>
+        Title="MainWindow" Height="600" Width="400"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        MouseDoubleClick="Window_MouseDoubleClick"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        d:DataContext="{d:DesignData Source=/CandidateSampleData.xaml}"
+        Icon="scoreboard.ico">
+    <Window.Resources>
+        <Storyboard x:Key="OnScoreLoaded" AutoReverse="True" RepeatBehavior="Forever" >
+            <ColorAnimationUsingKeyFrames  Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbScore">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFD60101"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="infoPanelFlyIn" >
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="spInfo"
+                             From="500" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut">
+                    </ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="tbScore">
+            <BeginStoryboard Storyboard="{StaticResource OnScoreLoaded}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Viewbox Stretch="Fill" >
+        <Grid Height="600" Width="400">
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://siteoforigin:,,,/background.jpg"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="141*"/>
+                <RowDefinition Height="331*"/>
+                <RowDefinition Height="128*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="spInfo" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Image  Source="{Binding Path=Portrait}" Margin="0,0,10,0" MaxWidth="160"  />
+                <StackPanel  VerticalAlignment="Center" Margin="10,0,0,0"  Width="160" >
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Center"></Setter>
+                            <Setter Property="Margin" Value="0,10"></Setter>
+                            <Setter Property="Foreground" Value="White"></Setter>
+                            <Setter Property="FontFamily" Value="Microsoft YaHei"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock FontSize="15" Margin="0">编号</TextBlock>
+                    <TextBlock FontSize="40" Text="{Binding Path=Number}" Margin="0,0,0,10" ></TextBlock>
+                    <Viewbox Height="70" Stretch="Uniform">
+                        <TextBlock Text="{Binding Path=Name}"  FontSize="70" Margin="5"></TextBlock>
+                    </Viewbox>
+
+                    <TextBlock FontSize="20" Text="{Binding Path=Company}" Foreground="#FFF2BC50"></TextBlock>
+                    <TextBlock x:Name="tbScoreTitle" Margin="0,20,0,0" FontSize="15">得分</TextBlock>
+                    <TextBlock x:Name="tbScore" Text="{Binding Path=Score}" FontWeight="Bold" FontSize="40" Margin="0" Foreground="#FFCD1B1B"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Viewbox>
 </Window>

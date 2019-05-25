@@ -8,19 +8,42 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="750" 
       Title="RandomPicturePage">
-    <Viewbox >
+    <Page.Resources>
+        <Storyboard x:Key="ScalePicture">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="dpPicture"
+                             From="0" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut"></ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="dpPicture"
+                             From="0" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut"></ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Triggers>
+        
+    </Page.Triggers>
+    <Viewbox Stretch="Fill">
         <Grid Width="750" Height="450" 
               d:DataContext="{d:DesignData Source=/SampleData/RandomPicturePageSampleData.xaml}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="8*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://siteoforigin:,,,/backgrounds/02.jpg" Stretch="Fill"></ImageBrush>
+            </Grid.Background>
             <ListView Name="lvPictures"
-                      
-                ItemsSource="{Binding Path=Pictures}" 
+                      Background="Transparent"
+                      ItemsSource="{Binding Path=Pictures}" 
                       SelectedItem="{Binding Path=SelectedPicture, Mode=TwoWay}" 
                       SelectedIndex="3"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Margin="69,62,68,20.333">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel></WrapPanel>
@@ -28,7 +51,7 @@
                 </ListView.ItemsPanel>
                 <ListView.Resources>
                     <ControlTemplate x:Key="ItemSelected" TargetType='{x:Type ListViewItem}'>
-                        <DockPanel Margin="5" Width="94" Height="94">
+                        <DockPanel Margin="5" Width="110" Height="65">
                             <Border BorderBrush="Red" BorderThickness="5">
                                 <Image Source="{Binding Path=FilePath}" Stretch="UniformToFill" >
                                 </Image>
@@ -36,7 +59,7 @@
                         </DockPanel>
                     </ControlTemplate>
                     <ControlTemplate x:Key="ItemDeSelected" TargetType='{x:Type ListViewItem}'>
-                        <DockPanel Margin="5" Width="94" Height="94">
+                        <DockPanel Margin="5" Width="110" Height="65">
                             <Border>
                                 <Image Source="{Binding Path=FilePath}" Stretch="UniformToFill" >
                                     <Image.Effect>
@@ -62,12 +85,21 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <DockPanel Name="dpPicture" Visibility="Hidden" 
+            <DockPanel Name="dpPicture" 
                        VirtualizingPanel.VirtualizationMode="Recycling"
-                       MouseDown="DpPicture_MouseDown">
+                       MouseDown="DpPicture_MouseDown"
+                       Margin="40" RenderTransformOrigin="0.5,0.5">
+                <DockPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </DockPanel.RenderTransform>
                 <Image Source="{Binding SelectedPicture.FilePath}"/>
             </DockPanel>
-            
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -75,7 +107,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label></Label>
-                <Button Name="btnChoose" Margin="5"  Grid.Column="1" Click="ChooseButton_Click">随机选图</Button>
+                <Button Name="btnChoose" Margin="5" Background="Transparent"  Grid.Column="1" Click="ChooseButton_Click">随机选图</Button>
 
             </Grid>
 

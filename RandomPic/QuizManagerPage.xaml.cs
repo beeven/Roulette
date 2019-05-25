@@ -15,6 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
 using RandomPic.Model;
+using NPOI.XSSF.UserModel;
+using NPOI.SS.UserModel;
+using Microsoft.Win32;
 
 namespace RandomPic
 {
@@ -28,6 +31,14 @@ namespace RandomPic
         {
             InitializeComponent();
             _quizcontext = quizContext;
+            this.Loaded += QuizManagerPage_Loaded;
+        }
+
+        private async void QuizManagerPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            var total = await _quizcontext.Quizzes.CountAsync();
+            var count = await _quizcontext.Quizzes.CountAsync(x => x.HasChosen == false);
+            tbOutput.Text = $"Total {total} quizzes in database. {count} is available.";
         }
 
         private async void BtnGenerate_Click(object sender, RoutedEventArgs e)
@@ -37,7 +48,8 @@ namespace RandomPic
 
             Random rand = new Random();
 
-            await _quizcontext.Database.ExecuteSqlCommandAsync("delete from Quizzes");
+            _quizcontext.Quizzes.RemoveRange(_quizcontext.Quizzes);
+            await _quizcontext.SaveChangesAsync();
             for (int i = 0; i < 10; i++)
             {
                 var quiz = new Quiz()
@@ -59,15 +71,74 @@ namespace RandomPic
 
             tbOutput.Text = "Quiz generated.";
             btnGenerate.IsEnabled = true;
-
-
-
-
         }
 
-        private void BtnLoad_Click(object sender, RoutedEventArgs e)
+        private async void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             tbOutput.Text = "Loading...";
+            btnLoad.IsEnabled = false;
+            btnGenerate.IsEnabled = false;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.DefaultExt = "xlsx";
+            openFileDialog.AddExtension = true;
+            
+            openFileDialog.Filter = "Excel 2007 Workbook|*.xlsx";
+            if (openFileDialog.ShowDialog() == true)
+                await ReadFromFile(openFileDialog.FileName);
+
+
+
+            var count = await _quizcontext.Quizzes.CountAsync();
+            tbOutput.Text = $"{count} quizzes are loaded.";
+            btnLoad.IsEnabled = true;
+            btnGenerate.IsEnabled = true;
+            ((Button)sender).Focus();
+        }
+
+        private async Task ReadFromFile(string fileName)
+        {
+            _quizcontext.Quizzes.RemoveRange(_quizcontext.Quizzes);
+            await _quizcontext.SaveChangesAsync();
+
+            var workbook = new XSSFWorkbook(fileName);
+            var sheet = workbook.GetSheetAt(0);
+            for (int i = 1; i <= sheet.LastRowNum; i++)
+            {
+                var row = sheet.GetRow(i);
+                if (row.GetCell(1, MissingCellPolicy.RETURN_BLANK_AS_NULL) == null)
+                {
+                    break;
+                }
+                var quiz = new Quiz()
+                {
+                    Key = (int)row.GetCell(0).NumericCellValue,
+                    Question = row.GetCell(1).StringCellValue,
+                    Selections = new List<string>(),
+                    HasChosen = false
+                };
+                var answerCell = row.GetCell(6);
+                if (answerCell.CellType == CellType.Numeric) // 判断题
+                {
+                    quiz.Answer = Convert.ToInt32(answerCell.NumericCellValue) - 1;
+                    quiz.Selections.Add("A. 对");
+                    quiz.Selections.Add("B. 错");
+                }
+                else
+                {
+                    var c = answerCell.StringCellValue.ToUpper()[0] - 0x41;
+                    quiz.Answer = c;
+                    for (int j = 2; j <= 5; j++)
+                    {
+                        quiz.Selections.Add(row.GetCell(j, MissingCellPolicy.RETURN_BLANK_AS_NULL)?.StringCellValue);
+                    }
+
+                }
+                await _quizcontext.Quizzes.AddAsync(quiz);
+            }
+            await _quizcontext.SaveChangesAsync();
+            workbook.Close();
         }
     }
 }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using System.Windows.Threading;
 
 namespace RandomPic
 {
@@ -26,6 +27,11 @@ namespace RandomPic
         private readonly QuizContext _quizcontext;
         private QuizViewModel model;
         private Random rand;
+
+        private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };
+
+        private List<Quiz> quizzes;
+
         public QuizPage(QuizContext quizContext)
         {
             _quizcontext = quizContext;
@@ -35,9 +41,33 @@ namespace RandomPic
 
             InitializeComponent();
 
+            timer.Tick += Timer_Tick;
         }
 
-        
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            GetNextQuiz();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            model.TotalQuizzesCount = await _quizcontext.Quizzes.CountAsync();
+            
+            quizzes = await _quizcontext.Quizzes.Where(x => x.HasChosen == false).ToListAsync();
+            model.RemainingQuizzesCount = quizzes.Count;
+            //GetNextQuiz();
+
+            //lbAnswered.Content = $"已答数：{model.TotalQuizzesCount - model.RemainingQuizzesCount}";
+            //lbTotal.Content = $"总题数：{model.TotalQuizzesCount}";
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            quizzes.Clear();
+            model.CurrentQuiz = null;
+        }
+
+
 
         private async void BtnShowAnswer_Click(object sender, RoutedEventArgs e)
         {
@@ -45,36 +75,56 @@ namespace RandomPic
             {
                 model.ShowAnswer = false;
                 lvSelections.SelectedIndex = -1;
+                model.CurrentQuiz.HasChosen = false;
+                quizzes.Add(model.CurrentQuiz);
             }
             else
             {
                 model.ShowAnswer = true;
                 lvSelections.SelectedIndex = model.CurrentQuiz.Answer;
                 model.CurrentQuiz.HasChosen = true;
-                await _quizcontext.SaveChangesAsync();
+                quizzes.Remove(model.CurrentQuiz);
             }
-
+            model.RemainingQuizzesCount = quizzes.Count;
+            //lbAnswered.Content = $"已答数：{model.TotalQuizzesCount - model.RemainingQuizzesCount}";
+            await _quizcontext.SaveChangesAsync();
         }
 
         private async void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            await GetNextQuiz();
-        }
-
-        private async Task GetNextQuiz()
-        {
-            var count = await _quizcontext.Quizzes.CountAsync(x => x.HasChosen == false);
-            var index = rand.Next(count) + 1;
-            var quiz = await _quizcontext.Quizzes.FirstAsync(x => x.Key == index);
-            model.ShowAnswer = false;
+            btnNext.IsEnabled = false;
+            btnShowAnswer.IsEnabled = false;
             lvSelections.SelectedIndex = -1;
-            model.CurrentQuiz = quiz;
+            lvSelections.Visibility = Visibility.Hidden;
+            //tbQuestion.Effect = new System.Windows.Media.Effects.BlurEffect() { Radius = 10 };
+            timer.Start();
+
+            await Task.Delay(3000);
+
+            timer.Stop();
+            btnNext.IsEnabled = true;
+            btnShowAnswer.IsEnabled = true;
+            lvSelections.Visibility = Visibility.Visible;
+            //tbQuestion.Effect = null;
+
         }
 
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void GetNextQuiz()
         {
-            await GetNextQuiz();
+            if (quizzes.Count == 0) return;
+            var index = rand.Next(quizzes.Count);
+            model.CurrentQuiz = quizzes[index];
+            model.RemainingQuizzesCount = quizzes.Count;
+            model.ShowAnswer = false;
         }
+
+
+
+        private void LvSelections_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+
     }
 }

@@ -9,12 +9,13 @@
         Icon="timer.ico"
         BorderThickness="0"
         AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <SolidColorBrush x:Key="NormalTimerBrush" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="AlertTimerBrush" Color="Red"></SolidColorBrush>
     </Window.Resources>
-    <Viewbox Stretch="Uniform">
+    <Viewbox Stretch="Fill">
     <Grid Height="600" Width="400">
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/background.jpg"></ImageBrush>
@@ -34,7 +35,7 @@
                FontSize="32" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Microsoft YaHei" Foreground="White"></Label>
         <Viewbox Grid.Row="2" Grid.Column="1" >
-            <TextBlock x:Name="timerText" Text="04:00.00" FontFamily="Consolas"/>
+            <TextBlock x:Name="timerText" Text="04:00.00" Foreground="White" FontFamily="Consolas"/>
         </Viewbox>
     </Grid>
     </Viewbox>

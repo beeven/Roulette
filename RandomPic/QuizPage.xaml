@@ -9,62 +9,92 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="750"
       Title="QuizPage"
-      d:DataContext="{d:DesignInstance sd:QuizSampleData, IsDesignTimeCreatable=True}" Loaded="Page_Loaded">
+      d:DataContext="{d:DesignInstance sd:QuizSampleData, IsDesignTimeCreatable=True}"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded">
 
-    <Viewbox>
+    <Viewbox Stretch="Fill">
         <Grid Width="750" Height="450">
             <Grid.Background>
-                <SolidColorBrush Color="White"></SolidColorBrush>
+                <ImageBrush ImageSource="pack://siteoforigin:,,,/backgrounds/03.jpg" Stretch="Fill"></ImageBrush>
             </Grid.Background>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="57*"/>
-                <ColumnDefinition Width="277*"/>
-                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="97*"/>
+                <ColumnDefinition Width="578*"/>
+                <ColumnDefinition Width="75*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="135*"/>
-                <RowDefinition Height="169*"/>
-                <RowDefinition Height="78*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="119*"/>
+                <RowDefinition Height="218*"/>
+                <RowDefinition Height="63*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="42" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Black" Height="42" Width="39" ></TextBlock>
-            <TextBlock  Grid.Column="1" Grid.Row="1" Text="{Binding Path=CurrentQuiz.Question}" FontSize="22" TextWrapping="Wrap"></TextBlock>
-            <ListView Name="lvSelections" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=CurrentQuiz.Selections}"
+            <TextBlock Text="{Binding Path=CurrentQuiz.Key}" TextAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Microsoft YaHei UI" Height="42" Width="39"  ></TextBlock>
+            <TextBlock Name="tbQuestion" Grid.Column="1" Grid.Row="1" Text="{Binding Path=CurrentQuiz.Question}" FontSize="22" TextWrapping="Wrap" FontFamily="Microsoft YaHei UI" Grid.RowSpan="2">
+                </TextBlock>
+            <ListView Name="lvSelections" Grid.Row="1" Grid.Column="1"
+                      Background="Transparent"
+                      ItemsSource="{Binding Path=CurrentQuiz.Selections}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                       HorizontalContentAlignment="Stretch" BorderThickness="0"
-                      SelectedIndex="1">
+                      Margin="1.667,119,0.333,0.333" Grid.RowSpan="2" PreviewMouseDown="LvSelections_PreviewMouseDown" >
                 <ListView.Resources>
+                    <ControlTemplate x:Key="SelectedTemplate" TargetType="ListViewItem">
+                        <Border BorderThickness="1" Background="Pink" BorderBrush="DeepPink">
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                    
                     <Style TargetType="ListViewItem">
+                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
+                        <Setter Property="TextBlock.Margin" Value="2"></Setter>
+                        <Setter Property="TextBlock.FontFamily" Value="Microsoft YaHei"></Setter>
+                        <Setter Property="TextBlock.Foreground" Value="White"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border>
+                                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsSelected" Value="true"/>
-                                    <Condition Property="Selector.IsSelectionActive" Value="true"/>
+                                    <!--<Condition Property="Selector.IsSelectionActive" Value="true"/>-->
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
-                                    <Setter Property="Background" Value="Pink"></Setter>
-                                    <Setter Property="BorderBrush" Value="Red"></Setter>
+                                    <Setter Property="Template" Value="{StaticResource SelectedTemplate}"></Setter>
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.Resources>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        
-                        <TextBlock Text="{Binding}" TextWrapping="Wrap" FontSize="18"></TextBlock>
-                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Column="1" Grid.Row="3">
+            <Grid Grid.Column="1" Grid.Row="3" Margin="1.667,0.667,0.333,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnNext" Click="BtnNext_Click" Margin="15">下一题</Button>
-                <Button Name="btnShowAnswer" Click="BtnShowAnswer_Click" Margin="15" Grid.Column="1">显示答案</Button>
+                <Button Name="btnNext" Click="BtnNext_Click" Margin="15" Background="Transparent">随机选题</Button>
+                <Button Name="btnShowAnswer" Click="BtnShowAnswer_Click" Margin="15" Grid.Column="1" Background="Transparent">显示答案</Button>
             </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--<Label Name="lbAnswered" HorizontalContentAlignment="Center" Foreground="WhiteSmoke">已答数</Label>
+                <Label Name="lbTotal" HorizontalContentAlignment="Center" Grid.Row="1" Foreground="WhiteSmoke">总题数</Label>-->
+            </Grid>
+            
         </Grid>
     </Viewbox>
 </Page>

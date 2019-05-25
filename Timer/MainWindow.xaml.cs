@@ -258,5 +258,10 @@ namespace Timer
         {
             this.timerText.Text = currentTime.ToString(@"mm\:ss\.ff");
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
