@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RandomPic"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="750" WindowStyle="None"
-        Source="WelcomePage.xaml" ShowsNavigationUI="False" 
+        ShowsNavigationUI="False" 
         KeyDown="NavigationWindow_KeyDown"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True">

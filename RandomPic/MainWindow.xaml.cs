@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RandomPic
 {
@@ -20,9 +21,13 @@ namespace RandomPic
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
-        public MainWindow()
+        private readonly IServiceProvider _services;
+        public MainWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _services = serviceProvider;
+            var welcomePage = _services.GetRequiredService<WelcomePage>();
+            Navigate(welcomePage);
         }
 
         private void NavigationWindow_KeyDown(object sender, KeyEventArgs e)
@@ -30,16 +35,17 @@ namespace RandomPic
             switch(e.Key)
             {
                 case Key.F1:
-                    Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
+                    
+                    Navigate(_services.GetRequiredService<WelcomePage>());
                     break;
                 case Key.F2:
-                    Navigate(new Uri("RandomPicturePage.xaml", UriKind.Relative));
+                    Navigate(_services.GetRequiredService<RandomPicturePage>());
                     break;
                 case Key.F3:
-                    Navigate(new Uri("QuizPage.xaml", UriKind.Relative));
+                    Navigate(_services.GetRequiredService<QuizPage>());
                     break;
                 case Key.F6:
-                    Navigate(new Uri("QuizManagerPage.xaml", UriKind.Relative));
+                    Navigate(_services.GetRequiredService<QuizManagerPage>());
                     break;
 
             }

@@ -26,14 +26,18 @@ namespace RandomPic
         private readonly QuizContext _quizcontext;
         private QuizViewModel model;
         private Random rand;
-        public QuizPage()
+        public QuizPage(QuizContext quizContext)
         {
-            InitializeComponent();
-            _quizcontext = App.Current.Properties["QuizContext"] as QuizContext;
-             model = new QuizViewModel();
+            _quizcontext = quizContext;
+            model = new QuizViewModel();
             DataContext = model;
             rand = new Random();
+
+            InitializeComponent();
+
         }
+
+        
 
         private async void BtnShowAnswer_Click(object sender, RoutedEventArgs e)
         {
@@ -54,12 +58,23 @@ namespace RandomPic
 
         private async void BtnNext_Click(object sender, RoutedEventArgs e)
         {
+            await GetNextQuiz();
+        }
+
+        private async Task GetNextQuiz()
+        {
             var count = await _quizcontext.Quizzes.CountAsync(x => x.HasChosen == false);
-            var index = rand.Next(count);
+            var index = rand.Next(count) + 1;
             var quiz = await _quizcontext.Quizzes.FirstAsync(x => x.Key == index);
             model.ShowAnswer = false;
             lvSelections.SelectedIndex = -1;
             model.CurrentQuiz = quiz;
+        }
+
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await GetNextQuiz();
         }
     }
 }

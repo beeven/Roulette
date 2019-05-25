@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="750"
       Title="QuizPage"
-      d:DataContext="{d:DesignInstance sd:QuizSampleData, IsDesignTimeCreatable=True}">
+      d:DataContext="{d:DesignInstance sd:QuizSampleData, IsDesignTimeCreatable=True}" Loaded="Page_Loaded">
 
     <Viewbox>
         <Grid Width="750" Height="450">
@@ -62,7 +62,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnNext" Click="BtnShowAnswer_Click" Margin="15">下一题</Button>
+                <Button Name="btnNext" Click="BtnNext_Click" Margin="15">下一题</Button>
                 <Button Name="btnShowAnswer" Click="BtnShowAnswer_Click" Margin="15" Grid.Column="1">显示答案</Button>
             </Grid>
         </Grid>

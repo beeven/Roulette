@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using RandomPic.Data;
 
 namespace RandomPic
 {
@@ -13,16 +18,66 @@ namespace RandomPic
     /// </summary>
     public partial class App : Application
     {
-        public App()
+
+        public IServiceProvider ServiceProvider { get; private set; }
+
+        public IConfiguration Configuration { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
         {
-            App.Current.Properties["QuizContext"] = new Data.QuizContext();
-            this.Exit += App_Exit;
+            base.OnStartup(e);
+
+            var builder = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetCurrentDirectory())
+             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            Configuration = builder.Build();
+
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            InitializeDatabase();
+
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
         }
 
-        private void App_Exit(object sender, ExitEventArgs e)
+        private void ConfigureServices(IServiceCollection services)
         {
-            var context = App.Current.Properties["QuizContext"] as Data.QuizContext;
-            context.Dispose();
+            services.AddTransient(typeof(MainWindow));
+            services.AddDbContext<QuizContext>(options =>
+            {
+                options.UseSqlite("Data Source=quiz.db");
+            });
+            services.AddTransient<RandomPicturePage>();
+            services.AddTransient<QuizPage>();
+            services.AddTransient<WelcomePage>();
+            services.AddTransient<QuizManagerPage>();
         }
+
+        private void InitializeDatabase()
+        {
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                //try
+                //{
+                    var context = services.GetRequiredService<QuizContext>();
+                    context.Database.Migrate(); // apply all migrations
+                    //SeedData.Initialize(services); // Insert default data
+                //}
+                //catch (Exception ex)
+                //{
+                //    var logger = services.GetRequiredService<ILogger<Program>>();
+                //    logger.LogError(ex, "An error occurred seeding the DB.");
+                //}
+            }
+
+
+        }
+
     }
 }
