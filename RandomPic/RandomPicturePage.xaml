@@ -42,6 +42,7 @@
                       ItemsSource="{Binding Path=Pictures}" 
                       SelectedItem="{Binding Path=SelectedPicture, Mode=TwoWay}" 
                       SelectedIndex="3"
+                      BorderThickness="0"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Margin="69,62,68,20.333">
                 <ListView.ItemsPanel>

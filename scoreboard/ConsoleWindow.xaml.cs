@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace scoreboard
+namespace Scoreboard
 {
     /// <summary>
     /// Interaction logic for ConsoleWindow.xaml
@@ -37,7 +37,7 @@ namespace scoreboard
                 Number = tbNumber.Text,
                 Company = tbCompany.Text,
                 Score = tbScore.Text,
-                Portrait = $"portraits/{tbNumber.Text}.jpg"
+                Portrait = $"pack://siteoforigin:,,,/portraits/{tbNumber.Text}.jpg"
             };
             CandidateInfoUpdated?.Invoke(this,candidate);
         }

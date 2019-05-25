@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace scoreboard
+namespace Scoreboard
 {
     public class CandidateInfo
     {
