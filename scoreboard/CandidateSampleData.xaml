@@ -1,6 +1,6 @@
 ﻿<local:CandidateInfo xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:scoreboard" 
+                    xmlns:local="clr-namespace:Scoreboard" 
                      Company="广州海关" 
                      Name="Leon Kennedymumu" 
                      Number="15" 

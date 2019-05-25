@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
-namespace scoreboard
+namespace Scoreboard
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,7 +32,7 @@ namespace scoreboard
             consoleWindow.Closed += ConsoleWindow_Closed;
             this.DataContextChanged += MainWindow_DataContextChanged;
 
-            DataContext = new CandidateInfo() { Number = "1", Name = "Leon Kennedy", Company = "广州海关", Score = "93.6", Portrait = "portraits/1.jpg" };
+            DataContext = new CandidateInfo() { Number = "1", Name = "Leon Kennedy", Company = "广州海关", Score = "93.6", Portrait = "pack://siteoforigin:,,,/portraits/1.jpg" };
         }
 
         private void ConsoleWindow_Closed(object sender, EventArgs e)
