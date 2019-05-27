@@ -9,6 +9,6 @@
       Title="EndingPage">
 
     <Grid>
-        <Image Source="pack://siteoforigin:,,,/backgrounds/04.jpg" Stretch="UniformToFill"></Image>
+        <Image Source="pack://siteoforigin:,,,/backgrounds/04.jpg" Stretch="Fill"></Image>
     </Grid>
 </Page>

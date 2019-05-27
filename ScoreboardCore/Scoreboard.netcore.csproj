@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,6 +7,7 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AssemblyName>Scoreboard</AssemblyName>
         <RootNamespace>Scoreboard</RootNamespace>
+        <ApplicationIcon>..\Scoreboard\scoreboard.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <ApplicationDefinition Include="..\Scoreboard\App.xaml">
@@ -31,9 +32,11 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
 
-        <Content Include="..\Scoreboard\portraits\**\*.*" LinkBase="portraits">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
+
+        <PackageReference Include="NPOI" Version="2.4.1" />
         <Resource Include="..\Scoreboard\scoreboard.ico" />
         <Resource Include="..\Scoreboard\controller.ico" />
     </ItemGroup>

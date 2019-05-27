@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,6 +7,7 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AssemblyName>RandomPic</AssemblyName>
         <RootNamespace>RandomPic</RootNamespace>
+      <ApplicationIcon>..\RandomPic\Quiz-Games-red.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <ApplicationDefinition Include="..\RandomPic\App.xaml">
@@ -26,10 +27,13 @@
     <ItemGroup>
         <Content Include="..\RandomPic\backgrounds\**\*.*" LinkBase="backgrounds">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         </Content>
 
         <Content Include="..\RandomPic\images\**\*.*" LinkBase="images">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          
         </Content>
         <Resource Include="..\RandomPic\Quiz-Games-red.ico" />
     </ItemGroup>

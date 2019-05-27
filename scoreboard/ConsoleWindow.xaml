@@ -6,10 +6,15 @@
         xmlns:local="clr-namespace:Scoreboard"
         mc:Ignorable="d"
         Icon="controller.ico"
-        Title="Console" Height="450" Width="450">
+        Title="Console" Height="450" Width="450"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -27,6 +32,7 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -40,15 +46,22 @@
             </Style>
         </Grid.Resources>
         <TextBlock Grid.Column="1" Grid.Row="1">序号</TextBlock>
-        <Label Grid.Column="3" Grid.Row="2" Foreground="LightGray">显示照片 portraits/{序号}.jpg</Label>
         <TextBox Name="tbNumber" Grid.Column="3" Grid.Row="1">2</TextBox>
+        <TextBlock Name="tbCandidatesCount" Grid.Row="2" Grid.Column="3" FontSize="12" TextAlignment="Left"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3">姓名</TextBlock>
         <TextBox Name="tbName" Grid.Column="3" Grid.Row="3">Jill Valentine</TextBox>
         <TextBlock Grid.Column="1" Grid.Row="5">单位</TextBlock>
         <TextBox Name="tbCompany" Grid.Column="3" Grid.Row="5">S.T.A.R.T.S.</TextBox>
-        <TextBlock Grid.Column="1" Grid.Row="7">分数</TextBlock>
-        <TextBox Name="tbScore" Grid.Column="3" Grid.Row="7">98.2</TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="7">评委评分</TextBlock>
+        <TextBox Name="tbScore1" Grid.Column="3" Grid.Row="7">98.2</TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="9">扣分</TextBlock>
+        <TextBox Name="tbScore2" Grid.Column="3" Grid.Row="9">5</TextBox>
+        <TextBlock Grid.Column="1" Grid.Row="11">最终得分</TextBlock>
+        <TextBox Name="tbScore" Grid.Column="3" Grid.Row="11">93.2</TextBox>
         <Label Grid.Column="3" Grid.Row="8" Foreground="LightGray">分数为空则不显示分数</Label>
-        <Button Grid.Column="3" Grid.Row="9" Click="ShowButton_Click">显示</Button>
+        <Button Grid.Column="4" Grid.Row="1" Click="ReadButton_Click">读取</Button>
+        <Button Name="btnImport" Grid.Column="4" Grid.Row="3" Click="ImportButton_Click">导入</Button>
+        <Button Grid.Column="1" Grid.Row="13" Click="ToggleElementsButton_Click">显示/隐藏元素</Button>
+        <Button Grid.Column="3" Grid.Row="13" Click="ShowButton_Click">输出到窗口</Button>
     </Grid>
 </Window>

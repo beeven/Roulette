@@ -13,10 +13,10 @@
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <SolidColorBrush x:Key="NormalTimerBrush" Color="White"></SolidColorBrush>
-        <SolidColorBrush x:Key="AlertTimerBrush" Color="Red"></SolidColorBrush>
+        <SolidColorBrush x:Key="AlertTimerBrush" Color="Orange"></SolidColorBrush>
     </Window.Resources>
     <Viewbox Stretch="Fill">
-    <Grid Height="600" Width="400">
+        <Grid Height="600" Width="400" x:Name="ContentGrid">
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/background.jpg"></ImageBrush>
         </Grid.Background>

@@ -2,8 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Scoreboard" 
                      Company="广州海关" 
-                     Name="Leon Kennedymumu" 
+                     Name="米热班姑·买买提明" 
                      Number="15" 
                      Score="93.2" 
-                     Portrait="portraits/1.jpg">
+                     Score1="95"
+                     Score2="92">
 </local:CandidateInfo>

@@ -220,7 +220,31 @@ namespace Timer
                 case Key.F3:
                     SwitchTimerMode(false);
                     break;
+                case Key.F1:
+                    ToggleElements();
+                    break;
             }
+        }
+
+        private bool bIsElementsHidden = false;
+        private void ToggleElements()
+        {
+            
+            if (!bIsElementsHidden)
+            {
+                foreach (UIElement elem in this.ContentGrid.Children)
+                {
+                    elem.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                foreach (UIElement elem in this.ContentGrid.Children)
+                {
+                    elem.Visibility = Visibility.Visible;
+                }
+            }
+            bIsElementsHidden = !bIsElementsHidden;
         }
 
 

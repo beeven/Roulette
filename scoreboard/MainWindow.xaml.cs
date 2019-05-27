@@ -23,16 +23,45 @@ namespace Scoreboard
     {
 
         public ConsoleWindow consoleWindow;
-        public MainWindow()
+        public MainWindow(ConsoleWindow consoleWindow)
         {
             InitializeComponent();
-            consoleWindow = new ConsoleWindow();
-            consoleWindow.CandidateInfoUpdated += ConsoleWindow_CandidateInfoUpdated;
-            consoleWindow.Show();
-            consoleWindow.Closed += ConsoleWindow_Closed;
+            this.consoleWindow = consoleWindow;
+            this.consoleWindow.CandidateInfoUpdated += ConsoleWindow_CandidateInfoUpdated;
+            this.consoleWindow.Closed += ConsoleWindow_Closed;
+            this.consoleWindow.ToggleElements += ConsoleWindow_ToggleElements;
             this.DataContextChanged += MainWindow_DataContextChanged;
+            this.consoleWindow.Show();
+            DataContext = new CandidateInfo()
+            {
+                Number = "1",
+                Name = "米热班姑·买买提明",
+                Company = "广州海关",
+                Score = "92.6",
+                Score1 = "95.6",
+                Score2 = "3"
+            };
+        }
 
-            DataContext = new CandidateInfo() { Number = "1", Name = "Leon Kennedy", Company = "广州海关", Score = "93.6", Portrait = "pack://siteoforigin:,,,/portraits/1.jpg" };
+        private bool bIsElementsHidden = false;
+        private void ConsoleWindow_ToggleElements(object sender, RoutedEventArgs e)
+        {
+            if(!bIsElementsHidden)
+            {
+                foreach(UIElement elem in this.gridContent.Children)
+                {
+                    elem.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                foreach (UIElement elem in this.gridContent.Children)
+                {
+                    elem.Visibility = Visibility.Visible;
+                }
+            }
+
+            bIsElementsHidden = !bIsElementsHidden;
         }
 
         private void ConsoleWindow_Closed(object sender, EventArgs e)
@@ -48,15 +77,15 @@ namespace Scoreboard
         private void MainWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var candidate = (CandidateInfo)DataContext;
-            if(!string.IsNullOrWhiteSpace(candidate.Score))
+            if (!string.IsNullOrWhiteSpace(candidate.Score) 
+                && !string.IsNullOrWhiteSpace(candidate.Score1)
+                && !string.IsNullOrWhiteSpace(candidate.Score2))
             {
-                tbScoreTitle.Visibility = Visibility.Visible;
-                tbScore.Visibility = Visibility.Visible;
+                gridScore.Visibility = Visibility.Visible;
             }
             else
             {
-                tbScoreTitle.Visibility = Visibility.Collapsed;
-                tbScore.Visibility = Visibility.Collapsed;
+                gridScore.Visibility = Visibility.Collapsed;
             }
             var storyboard = (Storyboard)this.FindResource("infoPanelFlyIn");
             storyboard.Begin();
@@ -65,7 +94,7 @@ namespace Scoreboard
 
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(this.WindowState == WindowState.Maximized)
+            if (this.WindowState == WindowState.Maximized)
             {
                 this.WindowState = WindowState.Normal;
             }

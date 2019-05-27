@@ -10,9 +10,9 @@ namespace Scoreboard
     {
         public string Name { get; set; }
         public string Number { get; set; }
-        public string Score { get; set; }
-        
         public string Company { get; set; }
-        public string Portrait { get; set; }
+        public string Score { get; set; }
+        public string Score1 { get; set; }
+        public string Score2 { get; set; }
     }
 }

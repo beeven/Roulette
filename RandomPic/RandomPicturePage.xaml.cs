@@ -38,11 +38,17 @@ namespace RandomPic
 
         }
 
-        private void CountDownTimer_Tick(object sender, EventArgs e)
+        private async void CountDownTimer_Tick(object sender, EventArgs e)
         {
             randPicTimer.Stop();
             countDownTimer.Stop();
+            await Task.Delay(1000);
+            dpPicture.Visibility = Visibility.Visible;
+            lvPictures.Visibility = Visibility.Hidden;
             btnChoose.IsEnabled = true;
+            var storyboard = (Storyboard)this.FindResource("ScalePicture");
+            storyboard.Begin();
+
         }
 
         private void RandPicTimer_Tick(object sender, EventArgs e)

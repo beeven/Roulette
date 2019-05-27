@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,6 +7,7 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AssemblyName>Timer</AssemblyName>
         <RootNamespace>Timer</RootNamespace>
+        <ApplicationIcon>..\Timer\timer.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <ApplicationDefinition Include="..\Timer\App.xaml">
@@ -32,11 +33,9 @@
         </Content>
         <Content Include="..\Timer\sounds\**\*.*" LinkBase="sounds">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         </Content>
         <Resource Include="..\Timer\timer.ico" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     </ItemGroup>
     
 </Project>
