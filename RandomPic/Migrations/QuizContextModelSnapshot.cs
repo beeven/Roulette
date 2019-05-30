@@ -20,7 +20,7 @@ namespace RandomPic.Migrations
                     b.Property<int>("Key")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Answer");
+                    b.Property<string>("Answer");
 
                     b.Property<bool>("HasChosen")
                         .ValueGeneratedOnAdd()

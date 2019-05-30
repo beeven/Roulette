@@ -14,7 +14,7 @@ namespace RandomPic.Model
         public int Key { get; set; }
         public string Question { get; set; }
         
-        public int Answer { get; set; }
+        public string Answer { get; set; }
 
         public bool HasChosen { get; set; }
 

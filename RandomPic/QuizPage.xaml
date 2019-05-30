@@ -49,6 +49,7 @@
             <ListView Name="lvSelections" Grid.Row="1" Grid.Column="1"
                       Background="Transparent"
                       ItemsSource="{Binding Path=CurrentQuiz.Selections}"
+                      SelectionMode="Multiple"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                       HorizontalContentAlignment="Stretch" BorderThickness="0"
                       Margin="1.667,119,0.333,0.333" Grid.RowSpan="2" PreviewMouseDown="LvSelections_PreviewMouseDown" >

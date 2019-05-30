@@ -1,41 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
-        <UseWPF>true</UseWPF>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
 
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <AssemblyName>Timer</AssemblyName>
-        <RootNamespace>Timer</RootNamespace>
-        <ApplicationIcon>..\Timer\timer.ico</ApplicationIcon>
-    </PropertyGroup>
-    <ItemGroup>
-        <ApplicationDefinition Include="..\Timer\App.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </ApplicationDefinition>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="..\Timer\**\*.cs" Exclude="..\Timer\obj\**" />
-        <None Include="..\Timer\*.settings" />
-        <EmbeddedResource Include="..\Timer\**\*.resx" />
-    </ItemGroup>
-    <ItemGroup>
-        <Page Include="..\Timer\MainWindow.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="..\Timer\background.jpg">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\Timer\TimerConfig.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\Timer\sounds\**\*.*" LinkBase="sounds">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        </Content>
-        <Resource Include="..\Timer\timer.ico" />
-    </ItemGroup>
-    
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Timer</AssemblyName>
+    <RootNamespace>Timer</RootNamespace>
+    <ApplicationIcon>..\Timer\timer.ico</ApplicationIcon>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\Timer\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Timer\**\*.cs" Exclude="..\Timer\obj\**" />
+    <None Include="..\Timer\*.settings" />
+    <EmbeddedResource Include="..\Timer\**\*.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Timer\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Timer\background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Timer\TimerConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Timer\sounds\**\*.*" LinkBase="sounds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Resource Include="..\Timer\timer.ico" />
+  </ItemGroup>
 </Project>

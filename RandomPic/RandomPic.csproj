@@ -235,9 +235,9 @@
     <Compile Include="EndingPage.xaml.cs">
       <DependentUpon>EndingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20190524105758_InitCreate.cs" />
-    <Compile Include="Migrations\20190524105758_InitCreate.designer.cs">
-      <DependentUpon>20190524105758_InitCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20190529145907_ChangeAnswerType.cs" />
+    <Compile Include="Migrations\20190529145907_ChangeAnswerType.designer.cs">
+      <DependentUpon>20190529145907_ChangeAnswerType.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\QuizContextModelSnapshot.cs" />
     <Compile Include="Model\PictureInfo.cs" />

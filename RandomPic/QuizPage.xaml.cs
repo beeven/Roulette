@@ -81,9 +81,15 @@ namespace RandomPic
             else
             {
                 model.ShowAnswer = true;
-                lvSelections.SelectedIndex = model.CurrentQuiz.Answer;
+                
                 model.CurrentQuiz.HasChosen = true;
                 quizzes.Remove(model.CurrentQuiz);
+                
+                foreach(char a in model.CurrentQuiz.Answer)
+                {
+                    int i = a - 0x41;
+                    lvSelections.SelectedItems.Add(model.CurrentQuiz.Selections[i]);
+                }
             }
             model.RemainingQuizzesCount = quizzes.Count;
             //lbAnswered.Content = $"已答数：{model.TotalQuizzesCount - model.RemainingQuizzesCount}";
@@ -99,7 +105,7 @@ namespace RandomPic
             //tbQuestion.Effect = new System.Windows.Media.Effects.BlurEffect() { Radius = 10 };
             timer.Start();
 
-            await Task.Delay(3000);
+            await Task.Delay(1000);
 
             timer.Stop();
             btnNext.IsEnabled = true;

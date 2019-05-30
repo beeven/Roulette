@@ -8,8 +8,8 @@ using RandomPic.Data;
 namespace RandomPic.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20190524105758_InitCreate")]
-    partial class InitCreate
+    [Migration("20190529145907_ChangeAnswerType")]
+    partial class ChangeAnswerType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace RandomPic.Migrations
                     b.Property<int>("Key")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Answer");
+                    b.Property<string>("Answer");
 
                     b.Property<bool>("HasChosen")
                         .ValueGeneratedOnAdd()

@@ -21,7 +21,7 @@ namespace RandomPic.SampleData
                                 "C.技术创新战略有利于企业掌握产品和技术发展的方向；",
                                 "D.制定技术创新战略有助于提高企业的技术素质、技术能力和技术管理水平。"
                             },
-                Answer = 1,
+                Answer = "A",
                 Key = 1
             };
             this.ShowAnswer = true;

@@ -11,12 +11,16 @@ namespace RandomPic.Data
 {
     public class QuizContext : DbContext
     {
+        public QuizContext(): base() { }
 
         public QuizContext(DbContextOptions<QuizContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            if(!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=quiz.db");
+            }
         }
 
         public DbSet<Model.Quiz> Quizzes { get; set; }

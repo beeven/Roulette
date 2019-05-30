@@ -2,7 +2,7 @@
 
 namespace RandomPic.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class ChangeAnswerType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace RandomPic.Migrations
                     Key = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Question = table.Column<string>(nullable: true),
-                    Answer = table.Column<int>(nullable: false),
+                    Answer = table.Column<string>(nullable: true),
                     HasChosen = table.Column<bool>(nullable: false, defaultValue: false),
                     Selections = table.Column<string>(nullable: true)
                 },

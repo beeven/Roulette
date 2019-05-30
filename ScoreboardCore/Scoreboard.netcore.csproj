@@ -1,44 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
-        <UseWPF>true</UseWPF>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
 
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <AssemblyName>Scoreboard</AssemblyName>
-        <RootNamespace>Scoreboard</RootNamespace>
-        <ApplicationIcon>..\Scoreboard\scoreboard.ico</ApplicationIcon>
-    </PropertyGroup>
-    <ItemGroup>
-        <ApplicationDefinition Include="..\Scoreboard\App.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </ApplicationDefinition>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="..\Scoreboard\**\*.cs" Exclude="..\Scoreboard\obj\**" />
-        <None Include="..\Scoreboard\*.settings" />
-        <EmbeddedResource Include="..\Scoreboard\**\*.resx" />
-    </ItemGroup>
-    <ItemGroup>
-        <Page Include="..\Scoreboard\MainWindow.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
-        <Page Include="..\Scoreboard\ConsoleWindow.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="..\Scoreboard\background.jpg">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Scoreboard</AssemblyName>
+    <RootNamespace>Scoreboard</RootNamespace>
+    <ApplicationIcon>..\Scoreboard\scoreboard.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\Scoreboard\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Scoreboard\**\*.cs" Exclude="..\Scoreboard\obj\**" />
+    <None Include="..\Scoreboard\*.settings" />
+    <EmbeddedResource Include="..\Scoreboard\**\*.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Scoreboard\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Scoreboard\ConsoleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Scoreboard\background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
 
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
 
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
 
-        <PackageReference Include="NPOI" Version="2.4.1" />
-        <Resource Include="..\Scoreboard\scoreboard.ico" />
-        <Resource Include="..\Scoreboard\controller.ico" />
-    </ItemGroup>
-    
+    <PackageReference Include="NPOI" Version="2.4.1" />
+    <Resource Include="..\Scoreboard\scoreboard.ico" />
+    <Resource Include="..\Scoreboard\controller.ico" />
+  </ItemGroup>
+
 </Project>

@@ -55,7 +55,7 @@ namespace RandomPic
                 var quiz = new Quiz()
                 {
                     Question = $"Loerm {i}",
-                    Answer = rand.Next(4),
+                    Answer = ((char)rand.Next(0x41,0x44)).ToString(),
                     Key = i + 1,
                     Selections = new List<string>()
                     {
@@ -121,14 +121,14 @@ namespace RandomPic
                 var answerCell = row.GetCell(6);
                 if (answerCell.CellType == CellType.Numeric) // 判断题
                 {
-                    quiz.Answer = Convert.ToInt32(answerCell.NumericCellValue) - 1;
+                    quiz.Answer = ((char)(answerCell.NumericCellValue + 0x40)).ToString();
                     quiz.Selections.Add("A. 对");
                     quiz.Selections.Add("B. 错");
                 }
                 else
                 {
-                    var c = answerCell.StringCellValue.ToUpper()[0] - 0x41;
-                    quiz.Answer = c;
+                    
+                    quiz.Answer = answerCell.StringCellValue.ToUpper();
                     for (int j = 2; j <= 5; j++)
                     {
                         quiz.Selections.Add(row.GetCell(j, MissingCellPolicy.RETURN_BLANK_AS_NULL)?.StringCellValue);
