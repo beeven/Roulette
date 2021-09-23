@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-#if !NETCOREAPP3_0
+#if NETFRAMEWORK
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #else
-using System.Text.Json.Serialization;
+using System.Text.Json;
 #endif
 
 namespace Timer
@@ -26,7 +26,7 @@ namespace Timer
         public static TimerMode[] ReadFromConfig()
         {
             if (!File.Exists("TimerConfig.json")) return new TimerMode[] { };
-#if !NETCOREAPP3_0
+#if NETFRAMEWORK
             var Config = JObject.Parse(File.ReadAllText("TimerConfig.json"));
             var version = Config.Value<string>("Version");
             if(version != "1") { throw new NotSupportedException("TimerConfig version is not supported."); }
@@ -36,7 +36,7 @@ namespace Timer
 #else
 
 
-            var config = JsonSerializer.Parse<TimerModeConfig>(File.ReadAllText("TimerConfig.json").Trim(), new JsonSerializerOptions() { AllowTrailingCommas = true });
+            var config = JsonSerializer.Deserialize<TimerModeConfig>(File.ReadAllText("TimerConfig.json").Trim(), new JsonSerializerOptions() { AllowTrailingCommas = true });
             var timerModes = config.TimerModes.Select(x => (TimerMode)x).ToArray();
 #endif
 
@@ -44,7 +44,7 @@ namespace Timer
         }
     }
 
-#if NETCOREAPP3_0
+#if !NETFRAMEWORK
     public class TimerModeConfig
     {
         public string Version { get; set; }
